@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+<section class="container">
+    <h1 style="margin-bottom:20px;color:green;" >Products</h1>
+    <div>
+        <a style="float: right;" class="btn btn-primary" href="{% url 'dashboard:productcreatepage' %}">Product Create</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+            <tr>
+                <td><a style="text-decoration: none;" href="{% url 'dashboard:productupdatepage' slug=product.slug %}"> {{ product.name }}</a></td>
+                <td>{{ product.category }}</td>
+                <td>Kshs.{{ product.price }}</td>
+                <td><a class="btn btn-primary" href="{% url 'dashboard:productdelete' slug=product.slug %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,93 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+.table-content{
+display: flex;
+text-align: center;
+}
+.order-customerpage{
+width: 100%;
+}
+
+.order-table{
+width: 60%;
+margin: auto;
+}
+
+.customer-table{
+width: 80%;
+margin: auto;
+}
+.card{
+border_bottom: 1px solid green;
+}
+
+.form-center{
+margin-top: 10px;
+width: 50%;
+margin: auto;
+border: 1px solid green;
+padding: 10px 20px;
+border-radius: 5px;
+background: #f1f3f4;
+}
+
+
+.order-table h2{text-align:left;border-bottom:1px solid grey;margin-bottom:20px;color:green;}
+.customer-table h2{text-align:left;border-bottom:1px solid grey;margin-bottom:20px;color:green;}
+@media(max-width: 760px){
+    .order-table{
+    margin-top: 10%;
+    font-size: 12px;
+    width: 90%;
+    margin: auto;
+    }
+    .order-table h2{
+    text-align: center;
+    }
+
+    .customer-table{
+    font-size: 12px;
+    top: 0;
+    left: 0 ;
+    width: 90%;
+    }
+    .customer-table h2{
+    text-align: center;
+    }
+    h1{
+    font-size: 20px;
+    }
+
+    }
+</style>
+
+
+<div class="order-table">
+    <h2 style="">Customer <small>{{ custo_count }}</small></h2>
+    <div>
+        <a href="{% url 'dashboard:customercreatepage' %}" style="float: right;" class="btn btn-primary">New Customer</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for x in customer %}
+            <tr>
+                <td><a class="btn btn-primary" href="{% url 'dashboard:customerpage' slug=x.slug %}">View</a></td>
+                <td>{{ x.name }}</td>
+                <td>{{ x.phone }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+    </div>
+
+{% endblock %}

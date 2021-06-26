@@ -1,0 +1,96 @@
+
+.container{
+    width: 80%;
+    padding-top: 50px;
+    }
+
+
+.cards-dashboard{
+width: 80%;
+margin: auto;
+display: flex;
+justify-content: space-between;
+text-align: center;
+}
+.cards{
+padding-top: 30px;
+width: 70%;
+margin: auto;
+display: flex;
+justify-content: space-between;
+text-align: center;
+}
+
+.table-content{
+display: flex;
+text-align: center;
+}
+.order-customerpage{
+width: 100%;
+}
+
+.order-table{
+width: 30%;
+}
+
+.customer-table{
+width: 60%;
+margin-left: 5%;
+}
+.card{
+border_bottom: 1px solid green;
+}
+
+.form-center{
+margin-top: 10px;
+width: 50%;
+margin: auto;
+border: 1px solid green;
+padding: 10px 20px;
+border-radius: 5px;
+background: #f1f3f4;
+}
+
+
+.order-table h2{text-align:left;border-bottom:1px solid grey;margin-bottom:20px;color:green;}
+.customer-table h2{text-align:left;border-bottom:1px solid grey;margin-bottom:20px;color:green;}
+@media(max-width: 760px){
+    .cards-dashboard{
+    width: 90%;
+    margin: auto;
+    }
+
+    .card{
+    font-size: 12px;
+    font-weight: bold;
+    }
+
+    .container{
+    width: 100%;
+    }
+    .order-table{
+    font-size: 15px;
+    width: 100%;
+    position : relative;
+    width: 100%;
+    }
+    .order-table h2{
+    text-align: center;
+    }
+
+    .customer-table{
+    position: absolute;
+    margin-top: 600px;
+    font-size: 12px;
+    top: 0;
+    left: 0 ;
+    width: 90%;
+    }
+    .customer-table h2{
+    text-align: center;
+    }
+    h1{
+    font-size: 20px;
+    }
+
+    }

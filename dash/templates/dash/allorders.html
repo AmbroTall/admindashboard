@@ -1,0 +1,108 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+
+
+
+.table-content{
+display: flex;
+text-align: center;
+}
+.order-customerpage{
+width: 100%;
+}
+
+.order-table{
+width: 30%;
+}
+
+.customer-table{
+width: 80%;
+margin: auto;
+}
+.card{
+border_bottom: 1px solid green;
+}
+
+.form-center{
+margin-top: 10px;
+width: 50%;
+margin: auto;
+border: 1px solid green;
+padding: 10px 20px;
+border-radius: 5px;
+background: #f1f3f4;
+}
+
+
+
+.order-table h2{text-align:left;border-bottom:1px solid grey;margin-bottom:20px;color:green;}
+.customer-table h2{text-align:left;border-bottom:1px solid grey;margin-bottom:20px;color:green;}
+@media(max-width: 760px){
+    .cards-dashboard{
+    width: 90%;
+    margin: auto;
+    }
+
+    .card{
+    font-size: 12px;
+    font-weight: bold;
+    }
+
+    .container{
+    width: 100%;
+    }
+
+
+    .order-table h2{
+    text-align: center;
+    }
+
+    .customer-table{
+    margin-top: 10%;
+    font-size: 12px;
+    top: 0;
+    left: 0 ;
+    width: 90%;
+    }
+    .customer-table h2{
+    text-align: center;
+    }
+    h1{
+    font-size: 20px;
+    }
+
+    }
+</style>
+<div class="customer-table">
+    <h2 style="">Orders<small>{{ order_count }}</small></h2>
+    <div  id="btn-btnn">
+        <a href="{% url 'dashboard:ordercreatepage' %}" class="btn btn-primary" style="float:right;">Create Order</a>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Update</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for oder in order %}
+            <tr>
+                <td>{{ oder.product.name }}</td>
+                <td>{{ oder.date }}</td>
+                <td>{{ oder.status }}</td>
+                <td><a class="btn btn-primary" href="{% url 'dashboard:updateorderpage' slug=oder.slug %}">Update</a></td>
+                <td><a  class="btn btn-primary" href="{% url 'dashboard:deleteorderpage' slug=oder.slug %}">Remove</a></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+{% endblock %}

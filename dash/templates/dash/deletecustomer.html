@@ -1,0 +1,38 @@
+{% extends "index.html" %}
+{% block content %}
+<style>
+    .form-center{
+    margin-top: 10px;
+    width: 50%;
+    margin: auto;
+    border: 1px solid green;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: #f1f3f4;
+    }
+
+    .sub-btn{
+    background: green;
+    padding: 6px 15px;
+    border-radius: 5px;
+    color: #fff;
+    }
+
+     @media(max-width: 760px){
+    .form-center{
+    width: 90%;
+    font-size: 15px;
+    margin: auto;
+    }
+    }
+</style>
+
+<div class="form-center" style="margin-top: 10px;">
+<h1>Are you sure you want to delete {{ object.name }}?</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary" value="confirm">
+</form>
+</div>
+
+{% endblock %}

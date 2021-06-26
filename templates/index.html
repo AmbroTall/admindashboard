@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+
+
+
+<body>
+{% include "dash/nabar.html" %}
+
+{% block content %}
+{% endblock %}
+
+
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+</html>
