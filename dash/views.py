@@ -5,6 +5,8 @@ from .foms import CreateCustomerForm, CreateOrderForm, CreateProductForm, Regist
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView,LogoutView
 from django.contrib.auth import login
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 class LoginPageView(LoginView):
     fields = '__all__'
@@ -32,7 +34,7 @@ class RegisterPageView(FormView):
         return super(RegisterPageView, self).get(*args,**kwargs)
 
 
-class AllCustomersView(ListView):
+class AllCustomersView(LoginRequiredMixin,ListView):
     model = Customer
     template_name = 'dash/allcustomers.html'
     context_object_name = 'customer'
@@ -43,7 +45,7 @@ class AllCustomersView(ListView):
         context['custo_count'] = context['customer'].all().count()
         return context
 
-class AllOrdersView(ListView):
+class AllOrdersView(LoginRequiredMixin,ListView):
     model = Order
     template_name = 'dash/allorders.html'
     context_object_name = 'order'
@@ -55,7 +57,7 @@ class AllOrdersView(ListView):
         return context
 
 
-class DashBoardView(ListView):
+class DashBoardView(LoginRequiredMixin,ListView):
     model = Customer
     template_name = 'dash/homepage.html'
     context_object_name = 'customer'
@@ -71,7 +73,7 @@ class DashBoardView(ListView):
 
 
 
-class ProductsView(ListView):
+class ProductsView(LoginRequiredMixin,ListView):
     model = Product
     template_name = 'dash/productpage.html'
     context_object_name = 'products'
@@ -81,12 +83,12 @@ class ProductsView(ListView):
         context['products'] = Product.objects.filter(admin_user=self.request.user)
         return context
 
-class CustomerDetailViewTrial(DetailView):
+class CustomerDetailViewTrial(LoginRequiredMixin,DetailView):
     model = Customer
     template_name = 'dash/customerspagetrial.html'
     context_object_name = 'customer'
 
-class CustomerDetailView(DetailView):
+class CustomerDetailView(LoginRequiredMixin,DetailView):
     model = Customer
     template_name = 'dash/customerspage.html'
     context_object_name = 'customer'
@@ -99,7 +101,7 @@ class CustomerDetailView(DetailView):
         return context
 
 
-class CustomerCreateView(CreateView):
+class CustomerCreateView(LoginRequiredMixin,CreateView):
     form_class = CreateCustomerForm
     template_name = 'dash/customercreate.html'
     success_url = reverse_lazy('dashboard:homepage')
@@ -109,7 +111,7 @@ class CustomerCreateView(CreateView):
         return super(CustomerCreateView,self).form_valid(form)
 
 
-class OrderCreateView(CreateView):
+class OrderCreateView(LoginRequiredMixin,CreateView):
     form_class = CreateOrderForm
     template_name = 'dash/ordercreate.html'
     success_url = reverse_lazy('dashboard:homepage')
@@ -118,7 +120,7 @@ class OrderCreateView(CreateView):
         form.instance.admin_user = self.request.user
         return super(OrderCreateView,self).form_valid(form)
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin,CreateView):
     form_class = CreateProductForm
     template_name = 'dash/productcreate.html'
     success_url = reverse_lazy('dashboard:productpage')
@@ -127,25 +129,25 @@ class ProductCreateView(CreateView):
         return super(ProductCreateView,self).form_valid(form)
 
 
-class UpdateCustomer(UpdateView):
+class UpdateCustomer(LoginRequiredMixin,UpdateView):
     model = Customer
     template_name = 'dash/updatecustomer.html'
     fields = ('name', 'email', 'phone')
     success_url = reverse_lazy('dashboard:homepage')
 
-class DeleteCustomer(DeleteView):
+class DeleteCustomer(LoginRequiredMixin,DeleteView):
     model = Customer
     template_name = 'dash/deletecustomer.html'
     success_url = reverse_lazy('dashboard:homepage')
 
 
-class UpdateOrder(UpdateView):
+class UpdateOrder(LoginRequiredMixin,UpdateView):
     model = Order
     template_name = 'dash/updateorder.html'
     fields = ('customer','product', 'status')
     success_url = reverse_lazy('dashboard:homepage')
 
-class DeleteOrder(DeleteView):
+class DeleteOrder(LoginRequiredMixin,DeleteView):
     model = Order
     template_name = 'dash/deleteorder.html'
     success_url = reverse_lazy('dashboard:homepage')
@@ -153,14 +155,14 @@ class DeleteOrder(DeleteView):
 
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin,UpdateView):
     model = Product
     fields = ('name','category','price')
     template_name = 'dash/productupdate.html'
     success_url = reverse_lazy('dashboard:productpage')
 
 
-class DeleteProductView(DeleteView):
+class DeleteProductView(LoginRequiredMixin,DeleteView):
     model = Product
     template_name = 'dash/deleteproduct.html'
     success_url = reverse_lazy('dashboard:productpage')
